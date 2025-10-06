@@ -1,5 +1,3 @@
-"""BFHL API - production-ready single-file FastAPI app (minimal comments)"""
-
 import os
 import re
 import logging
@@ -166,10 +164,10 @@ async def bfhl_post(request: DataRequest):
         resp["sum"],
     )
     return resp
-# ---------------------------------
+ 
 
 
-# ---------- Global exception handler ----------
+#  Global exception handler  
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error("Unhandled exception: %s", exc, exc_info=True)
@@ -177,12 +175,12 @@ async def global_exception_handler(request: Request, exc: Exception):
     if DEBUG:
         content["detail"] = str(exc)
     return JSONResponse(status_code=500, content=content)
-# -------------------------------------------
+ 
 
 
-# ---------- Run locally ----------
+#  Run locally  
 if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run("main:app", host="0.0.0.0", port=int(os.getenv("PORT", 8000)), reload=DEBUG, log_level="info")
-# --------------------------------
+ 
